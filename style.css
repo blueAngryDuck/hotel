@@ -1,0 +1,116 @@
+body {
+    background-image: url(img/ep_naturalwhite.webp);
+    font-size: 20px;
+}
+.container {
+    background-color: #fff;
+    width: 300px;
+    padding: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 150px;
+    box-shadow: 10px 10px 15px 5px #ccc;
+}
+input[type=text], input[type=password] {
+    width: 300px;
+    background-color: #efefef;
+    color: #666;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    font-size: 20px;
+    padding: 10px;
+    box-sizing: border-box;
+    outline: none;
+    margin-top: 10px;
+}
+input[type=text]:focus,
+input[type=password]:focus {
+    box-shadow: 10px 10px 15px 5px #ccc;
+    border: 2px solid #91b6f1;
+    background-color: #dde4f3;
+    color: #3b61a9;
+}
+input[type=text]:focus {
+    box-shadow: 10px 10px 15px 5px #ccc;
+}
+
+input[type=submit]{
+    width: 300px;
+    background-color: #6495ed;
+    font-size: 20px;
+    color: #fff;
+    padding: 15px 10px;
+    margin-top: 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    letter-spacing: 2px;
+    outline: none;
+}
+input[type=submit]:hover {
+    background-color: #6f9bec;
+}
+
+
+
+
+#logo {
+    max-width: 50%;
+    border-radius: 10%;
+}
+body {
+    background-color: #efebeb;
+    font-family: Arial, Helvetica, sans-serif;
+}
+main .row {
+    padding: 30px 0px;
+}    
+
+main img {
+    border: 1px solid #eeebeb;
+
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+main {
+    padding-bottom: 30px;
+}
+
+.btnw {
+    margin-top: 30px;
+}
+  
+section {
+    text-align: center;
+}
+
+/* .align-items-end {
+    height: fit-content;
+} */
+
+h3 {
+   margin-bottom: 30px;
+}
+
+#see {
+    padding-top: 30px;
+}
+
+.bottom-left {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #fff;
+    position:relative;
+    bottom: 50px;
+   
+}
+.block {
+    
+    background-color: #f7f7f7;
+    
+}
+header, section, footer {
+    padding: 30px 0px;
+}
+
+.admin {
+    background-color: rgb(219, 217, 222);
+}

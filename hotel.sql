@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Wrz 29, 2023 at 10:53 PM
+-- Generation Time: Paź 22, 2023 at 01:40 PM
 -- Wersja serwera: 10.4.28-MariaDB
 -- Wersja PHP: 8.2.4
 
@@ -31,11 +31,25 @@ CREATE TABLE `klienci` (
   `id` int(11) NOT NULL,
   `imię` varchar(255) NOT NULL,
   `nazwisko` varchar(255) NOT NULL,
-  `ilość_osób` int(2) NOT NULL,
-  `e-mail` varchar(255) NOT NULL,
-  `telefon` int(9) NOT NULL,
+  `ilość_osób` int(2) DEFAULT NULL,
+  `e_mail` varchar(255) NOT NULL,
+  `telefon` varchar(11) NOT NULL,
   `adres` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
+
+--
+-- Dumping data for table `klienci`
+--
+
+INSERT INTO `klienci` (`id`, `imię`, `nazwisko`, `ilość_osób`, `e_mail`, `telefon`, `adres`) VALUES
+(1, 'Jan', 'Kowal', 2, 'j.kow@gmail.com', '987456321', '50-505 Wrocław'),
+(2, 'Inna', 'Dyakonova', 2, 'inda@gmail.com', '678556798', '678 fgh'),
+(3, 'Valentin', 'Makiewić', 1, 'ghj765@gmail.com', '789456432', '876-67 Wrocław'),
+(4, 'Łukasz', 'Kowalski', NULL, 'lukasz@h.com', '346467842', '54-789 Legnica'),
+(6, 'Damian', 'Kot', NULL, 'dkot@home.com', '555777666', '0'),
+(15, 'imie', 'nazwisko', NULL, 'imnz@gmail.com', '12345789', 'Fabryczna 14, 50-000 Wrocław'),
+(16, 'imie', 'nazwisko', NULL, 'imnz@gmail.com', '12345789', 'Fabryczna 14, 50-000 Wrocław'),
+(17, 'imie', 'nazwisko', NULL, 'imnz@gmail.com', '12345789', 'Fabryczna 14, 50-000 Wrocław');
 
 -- --------------------------------------------------------
 
@@ -48,33 +62,22 @@ CREATE TABLE `pokoje` (
   `nazwa` varchar(255) NOT NULL,
   `cena` int(10) NOT NULL,
   `dostępność` bit(1) NOT NULL DEFAULT current_timestamp(),
-  `max_ilość_osób` int(2) DEFAULT NULL,
-  `rodzaj_pokoju` varchar(255) DEFAULT NULL,
-  `opis` text DEFAULT NULL,
-  `piętro` int(1) DEFAULT NULL,
-  `zdjęcia` longblob NOT NULL
+  `rodzaj_pokoju` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
 
 --
 -- Dumping data for table `pokoje`
 --
 
-INSERT INTO `pokoje` (`id`, `nazwa`, `cena`, `dostępność`, `max_ilość_osób`, `rodzaj_pokoju`, `opis`, `piętro`, `zdjęcia`) VALUES
-(1, 'solo', 100, b'1', 1, 'standart', 'Komfortowy pokój dla jednej osoby. Znajduje się na czwartym piętrze ze strony parku.\nCena za pokój standardowy obejmuje śniadanie.', 4, ''),
-(2, 'para', 130, b'1', 2, 'standart', 'Komfortowy pokój dla pary. Znajduje się na czwartym piętrze ze strony wewnętrznego dziedzińca. Pokój ma balkon.\nCena za pokój standardowy obejmuje śniadanie.', 4, ''),
-(3, 'rodzina', 150, b'1', 4, 'standart', 'Przestronny pokój, w którym może nocować nawet do 4 osób w komfortowych warunkach. Pokój jest podzielony na dwie przestrzeni dla rodziców i maksymalnie dwóch dzieci do 16 lat. Znajduje się na trzecim piętrze ze strony parku.\r\nIdealny wybór dla osób podróżujących rodziną.\r\nCena za pokój standardowy obejmuje śniadanie.', 3, ''),
-(4, 'rodzina', 160, b'1', 5, 'standart', 'Przestronny pokój, w którym może nocować nawet do 5 osób w komfortowych warunkach. Pokój jest podzielony na dwie przestrzeni dla rodziców i maksymalnie trzech dzieci do 16 lat, ma balkon oraz powiększoną łazienkę. Znajduje się na trzecim piętrze ze strony wewnętrznego dziedzińca.\nIdealny wybór dla osób podróżujących dużą rodziną.\nCena za pokój standardowy obejmuje śniadanie.', 3, ''),
-(5, 'rodzina', 250, b'1', 3, 'deluxe', 'Przestronny pokój o podwyższonym standardzie dla rodziny do trzech osób. Znajduje się na piątym piętrze ze strony wewnętrznego dziedzińca.\r\nPokój jest podzielony na dwie przestrzeni dla rodziców i dziecka do 16 lat. Ma balkon, dużą wannę i nielimitowany mini-bar.\r\nCena za pokój deluxe obejmuje śniadanie i zniżkę 70% na wszystkie dania w restauracji.', 5, ''),
-(6, 'solo', 180, b'1', 1, 'deluxe', 'Pokój o podwyższonym standardzie dla jednej osoby. Znajduje się na piątym piętrze ze strony wewnętrznego dziedzińca. Zawiera balkon, dużą wannę i nielimitowany mini-bar.\r\nCena za pokój deluxe obejmuje śniadanie i zniżkę 70% na wszystkie dania w restauracji.', 5, ''),
-(7, 'dwuosobowy', 100, b'1', 2, 'ekonomiczny', 'Komfortowy pokój dla dwóch osób. Znajduje się na drugim piętrze ze strony parku.\r\nCena za pokój standardowy obejmuje śniadanie.', 2, ''),
-(8, 'para', 230, b'1', 2, 'deluxe', 'Pokój o podwyższonym standardzie dla pary. Znajduje się na piątym piętrze ze strony parku, ma piękny widok na góry. Zawiera balkon, dużą wannę i nielimitowany mini-bar.\r\nCena za pokój deluxe obejmuje śniadanie i zniżkę 70% na wszystkie dania w restauracji.', 5, ''),
-(9, 'grupa', 120, b'1', 3, 'ekonomiczny', 'Przestronny pokój, w którym może nocować nawet do 3 osób w komfortowych warunkach. Znajduje się na drugim piętrze ze strony parku.\r\nIdealny wybór dla osób podróżujących grupą.', 2, ''),
-(10, 'grupa', 130, b'1', 4, 'ekonomiczny', 'Przestronny pokój, w którym może nocować nawet do 4 osób w komfortowych warunkach. Znajduje się na pierwszym piętrze ze strony parku.\r\nIdealny wybór dla osób podróżujących większą grupą.', 1, ''),
-(11, 'grupa', 140, b'1', 5, 'ekonomiczny', 'Przestronny pokój, w którym może nocować nawet do 5 osób w komfortowych warunkach. Pokój jest podzielony na dwie części sypialne, wspólny balkon i łazienkę. Znajduje się na drugim piętrze ze strony wewnętrznego dziedzińca.\r\nIdealny wybór dla osób podróżujących większą grupą.', 2, ''),
-(12, 'grupa', 160, b'1', 6, 'ekonomiczny', 'Przestronny pokój, w którym może nocować nawet do 6 osób w komfortowych warunkach. Pokój jest podzielony na dwie części sypialne, wspólny balkon i łazienkę. Znajduje się na pierwszym piętrze ze strony wewnętrznego dziedzińca.\r\nIdealny wybór dla osób podróżujących większą grupą.', 1, ''),
-(13, 'rodzina', 200, b'1', 3, 'standart', 'Przestronny pokój, w którym może nocować do 3 osób w komfortowych warunkach. Pokój jest podzielony na dwie przestrzeni dla rodziców i dziecka do 16 lat. Znajduje się na trzecim piętrze ze strony parku.\nIdealny wybór dla osób podróżujących rodziną.\nCena za pokój standardowy obejmuje śniadanie.', 3, ''),
-(14, 'solo', 100, b'1', 1, 'standart', 'Komfortowy pokój dla jednej osoby. Znajduje się na czwartym piętrze ze strony wewnętrznego dziedzińca.\nCena za pokój standardowy obejmuje śniadanie.', 4, ''),
-(15, 'para', 130, b'1', 2, 'standart', 'Komfortowy pokój dla pary. Znajduje się na czwartym piętrze ze strony wewnętrznego dziedzińca. Pokój ma balkon.\r\nCena za pokój standardowy obejmuje śniadanie.', 4, 0x24327924313024725868717a6372656753386f79397147674e4c6e377539554e346b435a6a63375561364b67496e4a332e79366f777874536c375853);
+INSERT INTO `pokoje` (`id`, `nazwa`, `cena`, `dostępność`, `rodzaj_pokoju`) VALUES
+(1, 'jednoosobowy', 100, b'1', 'standart'),
+(2, 'dwuosobowy', 130, b'1', 'standart'),
+(3, 'rodzinny', 150, b'1', 'standart'),
+(4, 'rodzinny', 200, b'1', 'standart'),
+(5, 'deluxe', 250, b'1', 'deluxe'),
+(6, 'deluxe', 250, b'1', 'deluxe'),
+(7, 'jednoosobowy', 100, b'1', 'standart'),
+(8, 'dwuosobowy', 230, b'1', 'deluxe');
 
 -- --------------------------------------------------------
 
@@ -103,16 +106,41 @@ INSERT INTO `pracownicy` (`id`, `imię`, `nazwisko`, `stanowisko`, `email`, `tel
 -- --------------------------------------------------------
 
 --
+-- Struktura tabeli dla tabeli `płatność`
+--
+
+CREATE TABLE `płatność` (
+  `id` int(11) NOT NULL,
+  `id_rezerwacji` int(11) DEFAULT NULL,
+  `status_płtności` bit(1) DEFAULT current_timestamp(),
+  `data_płatności` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Struktura tabeli dla tabeli `reklamacji`
 --
 
 CREATE TABLE `reklamacji` (
   `id` int(11) NOT NULL,
-  `id_rezerwacji` int(11) NOT NULL,
   `id_pracownika` int(11) NOT NULL,
   `opis` text NOT NULL,
-  `id_klienta` int(11) DEFAULT NULL
+  `id_klienta` int(11) NOT NULL,
+  `status_reklamacji` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
+
+--
+-- Dumping data for table `reklamacji`
+--
+
+INSERT INTO `reklamacji` (`id`, `id_pracownika`, `opis`, `id_klienta`, `status_reklamacji`) VALUES
+(4, 0, 'uhc uchniuu ojchu', 4, 0),
+(5, 0, 'Nie udało mi się zarezerwować pokój', 5, 0),
+(7, 0, 'cos tam ', 4, 0),
+(8, 0, 'składam reklamacje', 6, 0),
+(9, 0, 'już złożyłem reklamacje', 6, 0),
+(10, 0, 'już złożyłem reklamacje', 6, 0);
 
 -- --------------------------------------------------------
 
@@ -123,11 +151,21 @@ CREATE TABLE `reklamacji` (
 CREATE TABLE `rezerwacja` (
   `id` int(11) NOT NULL,
   `id_pokoju` int(11) NOT NULL,
-  `data_rezerwacji` date NOT NULL,
+  `rezerwacja_od` date NOT NULL,
+  `rezerwacja_do` date NOT NULL,
   `id_pracownika` int(11) NOT NULL,
-  `długość_rezerwacji` varchar(255) NOT NULL,
   `id_klienta` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
+
+--
+-- Dumping data for table `rezerwacja`
+--
+
+INSERT INTO `rezerwacja` (`id`, `id_pokoju`, `rezerwacja_od`, `rezerwacja_do`, `id_pracownika`, `id_klienta`) VALUES
+(1, 1, '2023-10-19', '2023-10-21', 2, 4),
+(10, 7, '2023-10-29', '2023-10-31', 2, 15),
+(11, 8, '2023-10-29', '2023-10-30', 2, 16),
+(12, 8, '2023-10-29', '2023-10-30', 2, 17);
 
 --
 -- Indeksy dla zrzutów tabel
@@ -152,13 +190,19 @@ ALTER TABLE `pracownicy`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indeksy dla tabeli `płatność`
+--
+ALTER TABLE `płatność`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_rezerwacji` (`id_rezerwacji`);
+
+--
 -- Indeksy dla tabeli `reklamacji`
 --
 ALTER TABLE `reklamacji`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `id_rezerwacji` (`id_rezerwacji`),
   ADD KEY `id_pracownika` (`id_pracownika`),
-  ADD KEY `id_klienta` (`id_klienta`);
+  ADD KEY `id_klienta` (`id_klienta`) USING BTREE;
 
 --
 -- Indeksy dla tabeli `rezerwacja`
@@ -177,7 +221,7 @@ ALTER TABLE `rezerwacja`
 -- AUTO_INCREMENT for table `klienci`
 --
 ALTER TABLE `klienci`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `pokoje`
@@ -195,25 +239,17 @@ ALTER TABLE `pracownicy`
 -- AUTO_INCREMENT for table `reklamacji`
 --
 ALTER TABLE `reklamacji`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `rezerwacja`
 --
 ALTER TABLE `rezerwacja`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Constraints for dumped tables
 --
-
---
--- Constraints for table `reklamacji`
---
-ALTER TABLE `reklamacji`
-  ADD CONSTRAINT `reklamacji_ibfk_1` FOREIGN KEY (`id_rezerwacji`) REFERENCES `rezerwacja` (`id`),
-  ADD CONSTRAINT `reklamacji_ibfk_2` FOREIGN KEY (`id_pracownika`) REFERENCES `pracownicy` (`id`),
-  ADD CONSTRAINT `reklamacji_ibfk_3` FOREIGN KEY (`id_klienta`) REFERENCES `klienci` (`id`);
 
 --
 -- Constraints for table `rezerwacja`
